@@ -8,6 +8,8 @@
 #include <iomanip>
 #include <stdarg.h>
 
+#include <algorithm> // for string_compare()
+
 inline std::string timestamp()
 {
     using namespace std::chrono;
@@ -119,5 +121,39 @@ usage)
     temp.Stop();
 
 */
+
+/*
+mode > 0 : __t convert to uppercase and compare
+mode = 0 : native compare
+mode < 0 : __t convert to lowercase and compare
+*/
+inline bool string_compare(std::string __t, const char* __s, int mode = 0)
+{
+    std::string temp(__t);
+
+    if(mode == 0)
+    {
+        //
+    }
+    else if(mode > 0)
+    {
+        std::transform(temp.begin(), temp.end(), temp.begin(), ::toupper);
+    }
+    else
+    {
+        std::transform(temp.begin(), temp.end(), temp.begin(), ::tolower);
+    }
+    
+    int result = temp.compare(__s);
+
+    if(result == 0)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
 
 #endif
